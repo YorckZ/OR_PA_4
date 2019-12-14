@@ -7,7 +7,8 @@ class Evolution{
 	private int mu;
 	private ObjFunction ob;
 	private long seed;
-
+	// array der mutabilitäten
+	
 	
     /**
      * Create an Evolution object to perform the evolutionary algorithm.
@@ -75,6 +76,73 @@ class Evolution{
      * @return The best value discovered during the algorithm
      */
     public double[] compute(int steps){
-		return null;
+    	// struktur für startpolutaion deklarieren
+    	// get arity = this.getOb().getArity().
+    	
+    	// schleife über mu
+    		// create_individual -> eigene methode
+    		// diese der leeren population hinzufügen => startpopulation fertig
+    	// ende schleife
+    	
+    	
+    	this.setInitialMutabilities();
+    	
+    	
+    	for (int i=0; i<steps; i++) {
+    		// kopiere startpopulation als Q
+    		// kopiere array der mutabilitäten als M
+    		// schleife über lambda:
+    			// wähle zufälliges individuum aus mu gleichverteilt
+    			// berechne zufallsvektor normalverteilt mit länge arity
+    			// berechne zufallszahl z log-normal-verteilt aus [0,2]
+    			// mutiere damit die mutabilität des zufällig gewählten Elters [i] multiplikativ mit z
+    			// addiere mutierte mutabilität mal z zum elter => speichere als nachkomme
+    			// füge nachkomme zur population Q hinzu
+    			// füge mutabilität des nachkommens zu M hinzu
+    		// ende schleife über lambda
+    		
+    		
+    		
+    		
+    		
+    		
+    		
+    		
+    		
+    		
+    	}
+    	
+    	return getReturnIndividual(population);
+		//return null;
     }
+    
+
+
+	private double[] create_individual (int arity) {
+    	// länge des returnarrays = arity
+    	// for schleife 0 bis arity-1
+    		// jede komponente random innerhalb this.getOb().getRange() der entsprechenden Komponente;
+    		// returnarray[i] setzen
+    	// ende schleife
+    	return null;
+    }
+    
+    private double getRandomDouble (double[] limits) {
+    	// lese limits[0] als untergrenze und limits[1] als obergrenze
+    	// erzeuge random double zwischen den grenzen
+    	return 0.0;
+    }
+    
+    private void setInitialMutabilities() {
+		// setze mutabilitäten initial (diese sollen sich später ändern können)	
+	}
+    
+    private double[] getReturnIndividual(double[] population) {
+    	// nimm die aktuelle population
+    	// iteriere drüber und berechne funktionswerte
+    	// wähle das individuum mit dem kleinsten funktionswert
+    	// returne das individuum
+    	return new double[] {0};
+    }
+    
 }
