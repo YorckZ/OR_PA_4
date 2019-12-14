@@ -77,8 +77,4 @@ class Evolution{
     public double[] compute(int steps){
 		return null;
     }
-
-
 }
-
-
