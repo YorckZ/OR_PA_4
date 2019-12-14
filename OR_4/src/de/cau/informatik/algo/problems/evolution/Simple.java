@@ -1,10 +1,8 @@
 package de.cau.informatik.algo.problems.evolution;
 
 public class Simple implements ObjFunction{
-
     double[] a;
     int n;
-
     double[] r;
 
     public Simple(double[] a, double[] r){
@@ -32,5 +30,4 @@ public class Simple implements ObjFunction{
         return r;
         
     }
-
 }

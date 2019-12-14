@@ -2,8 +2,8 @@ package de.cau.informatik.algo.problems.evolution;
 
 public class Rosenbrock implements ObjFunction{
 
-
-    public Rosenbrock(){}
+    public Rosenbrock(){
+    }
 
     @Override
     public double eval(double[] x){
@@ -26,5 +26,4 @@ public class Rosenbrock implements ObjFunction{
             return new double[]{-1.0,3.0};
         }
     }
-
 }

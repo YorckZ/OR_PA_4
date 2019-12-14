@@ -6,7 +6,8 @@ import static java.time.Duration.ofMillis;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class EvolutionTest {
-    @Test
+
+	@Test
     public void instance0() {
         ObjFunction f = new Simple(new double[] {2.0, 3.0}, new double[]{-100.0,200.0});
         test(f,f.getRange(0)[0], 3000);
@@ -24,13 +25,11 @@ public class EvolutionTest {
         test(f,-4.631432208448841, 5000);
     }
 
-
     @Test
     public void instance3() {
         ObjFunction f = new Rosenbrock();
         test(f,0, 4000);
     }
-
 
     @Test
     public void instance4() {
@@ -47,15 +46,14 @@ public class EvolutionTest {
     /**
      * Testet mit fest gesetztem timeout
      * */
-
     public void test(ObjFunction f, double opt) {
         test(f, opt, 5000);
     }
 
-
     public void test(ObjFunction f, double opt,int timeout) {
         test(f,opt,timeout,0.001);
     }
+    
     /**
      * Testet Kram
      * */
@@ -80,6 +78,4 @@ public class EvolutionTest {
 
             } , () -> "Timeout exceeded!");
     }
-
 }
-

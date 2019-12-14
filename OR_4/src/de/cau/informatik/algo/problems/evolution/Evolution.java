@@ -2,7 +2,13 @@ package de.cau.informatik.algo.problems.evolution;
 
 
 class Evolution{
+	private double mutability;
+	private int lambda;
+	private int mu;
+	private ObjFunction ob;
+	private long seed;
 
+	
     /**
      * Create an Evolution object to perform the evolutionary algorithm.
      *
@@ -13,8 +19,55 @@ class Evolution{
      * @param seed The seed to the random number generator
      */
     public Evolution(ObjFunction f, long seed){
+    	this.setOb(f); // wird dem Konstruktor übergeben
+    	this.setSeed(seed); // wird dem Konstruktor übergeben
+    	
+    	// Selbst festgelegte Parameter (eigener Ermessensspielraum)
+    	this.setMutability(1.0);
+    	this.setLambda(50);
+    	this.setMu(50);
+    }
+    
+    public void setMutability(double m) {
+    	this.mutability = m;
+    }
+    
+    public void setLambda(int l) {
+    	this.lambda = l;
+    }
+    
+    public void setMu(int m) {
+    	this.mu = m;
+    }
+    
+    public void setOb(ObjFunction f) {
+    	this.ob = f;
+    }
+    
+    public void setSeed (long s) {
+    	this.seed = s;
+    }
+    
+    public double getMutability(){
+    	return this.mutability;
+    }
+    
+    public int getLambda() {
+    	return this.lambda;
+    }
+    
+    public int getMu() {
+    	return this.mu;
     }
 
+    public ObjFunction getOb() {
+    	return this.ob;
+    }
+    
+    public long getSeed() {
+    	return this.seed;
+    }
+    
     /**
      * Repeat the evolutionary algorithm for a certain number of steps
      *

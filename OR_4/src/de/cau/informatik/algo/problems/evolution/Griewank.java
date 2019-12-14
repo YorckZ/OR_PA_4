@@ -1,9 +1,8 @@
 package de.cau.informatik.algo.problems.evolution;
 
 public class Griewank implements ObjFunction{
-
-
     int n;
+
     public Griewank(int n){
         this.n = n;
     }
@@ -32,5 +31,4 @@ public class Griewank implements ObjFunction{
     public double[] getRange(int i){
         return new double[]{-200.0,300.0};
     }
-
 }
