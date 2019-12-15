@@ -7,7 +7,10 @@ class Evolution{
 	private int mu;
 	private ObjFunction ob;
 	private long seed;
-	// array der mutabilitäten
+	// array der mutabilitäten mu
+	// array der mutabilitäten lambda
+	private double[] P;
+	private double[] Q; // entspriche Skript P Dach
 	
 	
     /**
@@ -75,12 +78,12 @@ class Evolution{
      * @param steps The number of iterations performed
      * @return The best value discovered during the algorithm
      */
-    public double[] compute(int steps){
+    public double[] compute(int steps){ // Aaron
     	// struktur für startpolutaion deklarieren
     	// get arity = this.getOb().getArity().
     	
     	// schleife über mu
-    		// create_individual (arity) -> eigene methode
+    		// create_ancestor(arity) -> eigene methode
     		// diese der leeren population hinzufügen => startpopulation fertig
     	// ende schleife
     	
@@ -88,37 +91,47 @@ class Evolution{
     	this.setInitialMutabilities();
     	
     	
-    	for (int i=0; i<steps; i++) {
+    	for (int i=0; i<steps; i++) { // Yorck
+
+    		// Schritt 0:
     		// kopiere startpopulation als Q
     		// kopiere array der mutabilitäten als M
+
+    		// Schritt 1:
     		// schleife über lambda:
-    			// wähle zufälliges individuum aus mu gleichverteilt
-    			// berechne zufallsvektor normalverteilt mit länge arity
-    			// berechne zufallszahl z log-normal-verteilt aus [0,2]
-    			// mutiere damit die mutabilität des zufällig gewählten Elters [i] multiplikativ mit z
-    			// addiere mutierte mutabilität mal z zum elter => speichere als nachkomme
-    			// füge nachkomme zur population Q hinzu
-    			// füge mutabilität des nachkommens zu M hinzu
+    			// create_successor();
     		// ende schleife über lambda
     		
     		
+    		// Problem: wir müssen wissen, an welchen Positionen in Q unsere neuen P stehen.
+
     		
+    		// Schritt 2:
+    		// Bilde Array der Funktionswerte in der Reihenfolge von Q
+    		// sortiere Q in Reihe ihrer Funktionswerte aufsteigend
+    		// sortiere f(x)[] entsprechend
+    		// übernimm die ersten mu Individuen nach P
     		
-    		
-    		
-    		
-    		
-    		
-    		
+    		// Schritt 3:
+    		// übernimm die mutabilitäten der auswahl aus Q, die es nach P schafft
     	}
     	
     	return getReturnIndividual();
 		//return null;
     }
     
+    private void create_successor() { // Yorck
+		// wähle zufälliges individuum aus mu gleichverteilt
+		// berechne zufallsvektor normalverteilt mit länge arity
+		// berechne zufallszahl z log-normal-verteilt aus [0,2]
+		// mutiere damit die mutabilität des zufällig gewählten Elters [i] multiplikativ mit z
+		// addiere mutierte mutabilität mal z zum elter => speichere als nachkomme
+		// füge nachkomme zur population Q hinzu
+		// füge mutabilität des nachkommens zu M hinzu
+    }
 
 
-	private double[] create_individual (int arity) {
+	private double[] create_ancestor (int arity) { // Aaron
     	// länge des returnarrays = arity
     	// for schleife 0 bis arity-1
     		// jede komponente random innerhalb this.getOb().getRange() der entsprechenden Komponente;
@@ -127,17 +140,17 @@ class Evolution{
     	return null;
     }
     
-    private double getRandomDouble (double[] limits) {
+    private double getRandomDouble (double[] limits) { // Aaron + NV + LNV
     	// lese limits[0] als untergrenze und limits[1] als obergrenze
     	// erzeuge random double zwischen den grenzen
     	return 0.0;
     }
     
-    private void setInitialMutabilities() {
+    private void setInitialMutabilities() { // Yorck
 		// setze mutabilitäten initial (diese sollen sich später ändern können)	
 	}
     
-    private double[] getReturnIndividual() {
+    private double[] getReturnIndividual() { // Yorck
     	// nimm die aktuelle population
     	// iteriere drüber und berechne funktionswerte
     	// wähle das individuum mit dem kleinsten funktionswert
