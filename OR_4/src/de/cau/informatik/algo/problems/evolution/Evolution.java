@@ -80,7 +80,7 @@ class Evolution{
     	// get arity = this.getOb().getArity().
     	
     	// schleife über mu
-    		// create_individual -> eigene methode
+    		// create_individual (arity) -> eigene methode
     		// diese der leeren population hinzufügen => startpopulation fertig
     	// ende schleife
     	
@@ -112,7 +112,7 @@ class Evolution{
     		
     	}
     	
-    	return getReturnIndividual(population);
+    	return getReturnIndividual();
 		//return null;
     }
     
@@ -137,7 +137,7 @@ class Evolution{
 		// setze mutabilitäten initial (diese sollen sich später ändern können)	
 	}
     
-    private double[] getReturnIndividual(double[] population) {
+    private double[] getReturnIndividual() {
     	// nimm die aktuelle population
     	// iteriere drüber und berechne funktionswerte
     	// wähle das individuum mit dem kleinsten funktionswert
