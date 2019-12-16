@@ -19,8 +19,10 @@ public static void main(String[] args) {
 			LNV = Math.exp(Zufallszahl.nextGaussian());
 		}	
 		
+		
+		System.out.println(Zufallszahl.nextDouble());
 		//System.out.println(Zufallszahl.nextInt(50));
-		System.out.println(NV);
-		System.out.println(LNV);	
+		//System.out.println(NV);
+		//System.out.println(LNV);	
 	}
 }
