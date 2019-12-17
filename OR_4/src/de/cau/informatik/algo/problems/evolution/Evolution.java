@@ -133,10 +133,6 @@ class Evolution{
 			}
 
 
-			// Problem: wir m�ssen wissen, an welchen Positionen in Q unsere neuen P stehen.
-
-			// Johannes: Klasse f�r Individuen schreiben, Listen schreiben
-
 			// Schritt 2: // Johannes
 			// Bilde Array der Funktionswerte in der Reihenfolge von Q
 			// sortiere Q in Reihe ihrer Funktionswerte aufsteigend
