@@ -11,10 +11,13 @@ class Evolution{
 	private int mu; // Wird im Konstruktor gesetzt
 	private ObjFunction ob; // Wird dem Algorithmus beim Aufruf �bergeben
 	private long seed; // Wird dem Algorithmus beim Aufruf �bergeben
-	private double[] mutab_mu; // Array der Mutabilit�ten von Mu
-	private double[] mutab_lambda; // Array der Mutabilit�ten von Lambda
-	private double[][] P; // Population P
-	private double[][] Q; // entspricht Skript Population "P Dach"
+//	private double[] mutab_mu; // Array der Mutabilit�ten von Mu
+//	private double[] mutab_lambda; // Array der Mutabilit�ten von Lambda
+//	private double[][] P; // Population P
+//	private double[][] Q; // entspricht Skript Population "P Dach"
+	private List<PopulationElement> ListP;
+	private List<PopulationElement> ListQ;
+	
 	// bislang ohne Getter/Setter/SLoA
 	private Random Zufallszahl = new Random();									// Erstellt ein Objekt der Klasse Random, auf dem die Methoden zur Zufallszahl ausgef�hrt werden k�nnen; wichtig daf�r: import java.util.*
 	
@@ -59,23 +62,7 @@ class Evolution{
     public void setSeed (long s) {
     	this.seed = s;
     }
-    
-    public void setMutab_mu(double[] mut) {
-    	this.mutab_mu = mut;
-    }
-    
-    public void setMutab_lambda (double[] lam) {
-    	this.mutab_lambda = lam;
-    }
-    
-    public void setP (double[][] P_in) {
-    	this.P = P_in;
-    }
-    
-    public void setQ (double[][] Q_in) {
-    	this.Q = Q_in;
-    }
-    
+ 
     public double getMutability(){
     	return this.mutability;
     }
@@ -83,7 +70,7 @@ class Evolution{
     public int getLambda() {
     	return this.lambda;
     }
-    
+  
     public int getMu() {
     	return this.mu;
     }
@@ -95,28 +82,9 @@ class Evolution{
 	public long getSeed() {
 		return this.seed;
 	}
+	
 
-	// weg
-	public double[] getMutab_Mu() {
-		return this.mutab_mu;
-	}
 
-	// weg
-	public double[] getMutab_lam() {
-		return this.mutab_lambda;
-	}
-
-	// �ndern
-	public double[][] getP() {
-		return this.P;
-	}
-
-	// �ndern
-	public double[][] getQ() {
-		return this.Q;
-	}
-
-	// Attribut f�r global Bestes Individuum
 
 
 	/**
@@ -138,10 +106,11 @@ class Evolution{
 		double[][] Startpopulation = new double[this.getMu()][this.getOb().getArity()];            // Struktur f�r Startpolutaion: Startpop. besteht aus mu Individuen, mit Werten der Anzahl an Parametern entsprechend
 
 		for (int i = 0; i < this.getMu(); i++) {                                                // schleife �ber mu
-			Startpopulation[i] = create_ancestor();                                            // create_ancestor() erstellt ein Individuum, welches dann der Startpopulation hinzugef�gt wird
-			// listP.add( create_ancestor() );
+//			Startpopulation[i] = create_ancestor();                                            // create_ancestor() erstellt ein Individuum, welches dann der Startpopulation hinzugef�gt wird
+			this.getListP().add( create_ancestor() );
 		}
-		this.setP(Startpopulation); // Startpopulation merken
+		
+//		this.setP(Startpopulation); // Startpopulation merken
 
 		this.setInitialMutabilities();
 
@@ -150,8 +119,9 @@ class Evolution{
 			// Schritt 0:
 			// Kopiere Startpopulation als Q
 			// Kopiere Array der Mutabilit�ten als M
-			this.setQ(this.getP());
-			this.setMutab_lambda(this.getMutab_Mu());
+//			this.setQ(this.getP());
+			this.setListQ(this.getListP());
+//			this.setMutab_lambda(this.getMutab_Mu());
 
 
 			// Schritt 1:
@@ -172,13 +142,14 @@ class Evolution{
 			// sortiere Q in Reihe ihrer Funktionswerte aufsteigend
 			// sortiere f(x)[] entsprechend
     		// �bernimm die ersten mu Individuen nach P
+			setListP(sortAndLimitList(getListQ()));
     		
     		// Schritt 3: // Johannes
     		// �bernimm die mutabilit�ten der auswahl aus Q, die es nach P schafft
     	}
     	
-    	return getReturnIndividual();
-		//return null;
+//    	return getReturnIndividual(); TODO
+		return null;
     }
 
     // 0 %
@@ -190,13 +161,10 @@ class Evolution{
 		// Addiere mutierte Mutabilit�t mal z zum Elter => Speichere als Nachkomme
 		// F�ge Nachkomme zur Population Q hinzu
 		// F�ge Mutabilit�t des Nachkommens zu M hinzu
-    	
-    	
-    	
     }
 
     // muss wahrscheinlich neu - Johannes
-	private double[] create_ancestor () { // Aaron
+	private PopulationElement create_ancestor () { // Aaron
     	// l�nge des returnarrays = arity
     	// for schleife 0 bis arity-1
     		// jede komponente random innerhalb this.getOb().getRange() der entsprechenden Komponente;
@@ -213,25 +181,26 @@ class Evolution{
     		ancestor[i] = getRandomDouble(this.getOb().getRange(i)[0], this.getOb().getRange(i)[1]);
     	}
     		
-    	return ancestor;
+//    	return ancestor;
+    	return new PopulationElement();
     }
 
 	// fertig
     private void setInitialMutabilities() { // Yorck
 		// setze mutabilit�ten initial (diese sollen sich sp�ter �ndern k�nnen)
     	for (int i=0; i<this.getMu(); i++) {
-    		this.mutab_mu[i] = this.getMutability();
+//    		this.mutab_mu[i] = this.getMutability(); TODO
     	}
-    		
 	}
     
-    // 0 % - verschoben
-    private double[] getReturnIndividual() { // Yorck
+    // fertig
+    private PopulationElement getReturnIndividual() { // Yorck
     	// nimm die aktuelle population
     	// iteriere dr�ber und berechne funktionswerte
     	// w�hle das individuum mit dem kleinsten funktionswert
     	// returne das individuum
-    	return new double[] {0};
+//    	return new double[] {0};
+    	return this.getListP().get(0);
     }
 
     
@@ -286,6 +255,25 @@ class Evolution{
 				.sorted(Comparator.comparing(PopulationElement::getFunctionValue))
 				.limit(getMu())
 				.collect(Collectors.toList());
+	}
+
+	public List<PopulationElement> getListP() {
+		return ListP;
+	}
+
+
+	public void setListP(List<PopulationElement> listP) {
+		ListP = listP;
+	}
+
+
+	public List<PopulationElement> getListQ() {
+		return ListQ;
+	}
+
+
+	public void setListQ(List<PopulationElement> listQ) {
+		ListQ = listQ;
 	}
 
 	private class PopulationElement {
