@@ -179,6 +179,9 @@ class Evolution{
 		// Addiere mutierte Mutabilität mal z zum Elter => Speichere als Nachkomme
 		// Füge Nachkomme zur Population Q hinzu
 		// Füge Mutabilität des Nachkommens zu M hinzu
+    	
+    	
+    	
     }
 
     // fertig
@@ -224,21 +227,17 @@ class Evolution{
     // Methoden zur Erstellung der Zufallszahlen:
     
     // fertig
-    // Methoden zur Erstellung der Zufallszahlen:
-	
 	private double getRandomDouble(double min, double max){				// Methode zur Erstellung von Parameterwerten der Individuen. Empfängt min und max als Unter- bzw. Obergrenze
 		
 		return (min + (max - min) * Zufallszahl.nextDouble());			// gibt einen gleichverteilten Double zwischen Min und Max zurück
 	}
 	
-
 	// fertig
 	private int getRandomIndex(){ 										// Methode zur zufälligen Auswahl von Eltern
     	
     	return Zufallszahl.nextInt(this.getMu());						// gibt einen zufälligen Integer zwischen 0 und mu zurück									
     }
 	
-
 	// fertig
 	private double[] getRandomZ(){										// Methode zur Ermittlung eines normalverteilten Zufallsvektors z zwischen -1 und 1 (für die Mutation eines Elters)
 		
@@ -257,7 +256,6 @@ class Evolution{
 		
 		return z;
 	}
-	
 	
 	// fertig
 	private double getRandomKsi() {										// Methode zur Ermittlung einer log-normalverteilten Zufallszahl Ksi zwischen 0 und 2 (für die Mutation der Mutabilitä)
