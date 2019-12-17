@@ -93,21 +93,28 @@ class Evolution{
     	return this.seed;
     }
     
+    // weg
     public double[] getMutab_Mu() {
     	return this.mutab_mu;
     }
     
+    // weg
     public double[] getMutab_lam() {
     	return this.mutab_lambda;
     }
     
+    // ändern
     public double[][] getP() {
     	return this.P;
     }
     
+    // ändern
     public double[][] getQ() {
     	return this.Q;
     }
+    
+    // Attribut für global Bestes Individuum
+    
     
     
     /**
@@ -130,6 +137,7 @@ class Evolution{
     	
     	for (int i = 0; i < this.getMu(); i++) {												// schleife über mu
     		Startpopulation[i] = create_ancestor ();											// create_ancestor() erstellt ein Individuum, welches dann der Startpopulation hinzugefügt wird
+    		// listP.add( create_ancestor() );
     	}    	
     	this.setP(Startpopulation); // Startpopulation merken
     	
@@ -155,14 +163,15 @@ class Evolution{
     		
     		// Problem: wir müssen wissen, an welchen Positionen in Q unsere neuen P stehen.
 
+			// Johannes: Klasse für Individuen schreiben, Listen schreiben
     		
-    		// Schritt 2:
+    		// Schritt 2: // Johannes
     		// Bilde Array der Funktionswerte in der Reihenfolge von Q
     		// sortiere Q in Reihe ihrer Funktionswerte aufsteigend
     		// sortiere f(x)[] entsprechend
     		// übernimm die ersten mu Individuen nach P
     		
-    		// Schritt 3:
+    		// Schritt 3: // Johannes
     		// übernimm die mutabilitäten der auswahl aus Q, die es nach P schafft
     	}
     	
@@ -184,7 +193,7 @@ class Evolution{
     	
     }
 
-    // fertig
+    // muss wahrscheinlich neu - Johannes
 	private double[] create_ancestor () { // Aaron
     	// länge des returnarrays = arity
     	// for schleife 0 bis arity-1
