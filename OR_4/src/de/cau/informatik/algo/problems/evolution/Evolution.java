@@ -279,7 +279,7 @@ class Evolution{
 	private class PopulationElement {
 
 		private double functionValue;
-		private double[][] parameter;
+		private double[] parameter;
 		private double mutability;
 
 		public double getFunctionValue() {
@@ -290,11 +290,11 @@ class Evolution{
 			this.functionValue = functionValue;
 		}
 
-		public double[][] getParameter() {
+		public double[] getParameter() {
 			return parameter;
 		}
 
-		public void setParameter(double[][] parameter) {
+		public void setParameter(double[] parameter) {
 			this.parameter = parameter;
 		}
 
