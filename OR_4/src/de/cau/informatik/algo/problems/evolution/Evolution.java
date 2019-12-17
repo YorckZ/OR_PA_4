@@ -1,5 +1,6 @@
 package de.cau.informatik.algo.problems.evolution;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
@@ -15,8 +16,8 @@ class Evolution {
 	//	private double[] mutab_lambda; // Array der Mutabilitäten von Lambda
 	//	private double[][] P; // Population P
 	//	private double[][] Q; // entspricht Skript Population "P Dach"
-	private List<PopulationElement> listP;
-	private List<PopulationElement> listQ;
+	private List<PopulationElement> listP = new ArrayList();
+	private List<PopulationElement> listQ = new ArrayList();
 	private Random zufallszahl;
 
 	/**
@@ -36,6 +37,7 @@ class Evolution {
 		this.setMutability(1.0);
 		this.setLambda(50);
 		this.setMu(50);
+
 		this.setZufallszahl(new Random(seed));// Erstellt ein Objekt der Klasse Random mit dem gegebenen Seed, auf dem die Methoden zur Zufallszahl ausgeführt werden können; wichtig dafür: import java.util.*
 	}
 
@@ -54,17 +56,15 @@ class Evolution {
 		// create_ancestor(arity) -> eigene Methode
 		// Diese der leeren Population hinzufügen => Startpopulation fertig
 		// Ende Schleife
-
-		double[][] Startpopulation = new double[getMu()][getOb().getArity()];            // Struktur für Startpolutaion: Startpop. besteht aus mu Individuen, mit Werten der Anzahl an Parametern entsprechend
+		// double[][] Startpopulation = new double[getMu()][getOb().getArity()];            // Struktur für Startpolutaion: Startpop. besteht aus mu Individuen, mit Werten der Anzahl an Parametern entsprechend
 
 		for (int i = 0; i < getMu(); i++) {                                                // schleife über mu
 //			Startpopulation[i] = create_ancestor();                                            // create_ancestor() erstellt ein Individuum, welches dann der Startpopulation hinzugefügt wird
 			getListP().add(create_ancestor());
 		}
 
-//		setP(Startpopulation); // Startpopulation merken
-
-		setInitialMutabilities();
+		// setP(Startpopulation); // Startpopulation merken
+		// setInitialMutabilities();
 
 		for (int i = 0; i < steps; i++) { // Yorck
 
@@ -72,7 +72,7 @@ class Evolution {
 			// Kopiere Startpopulation als Q
 			// Kopiere Array der Mutabilitäten als M
 //			setQ(getP());
-			setListQ(getListP());
+			setListQ(new ArrayList(getListP()));
 //			setMutab_lambda(getMutab_Mu());
 
 
@@ -81,7 +81,7 @@ class Evolution {
 			// create_successor();
 			// ende schleife über lambda
 			for (int j = 0; j < getLambda(); j++) {
-				create_successor();
+				getListQ().add(create_successor());
 			}
 
 
@@ -90,25 +90,14 @@ class Evolution {
 			// sortiere Q in Reihe ihrer Funktionswerte aufsteigend
 			// sortiere f(x)[] entsprechend
 			// übernimm die ersten mu Individuen nach P
-			setListP(sortAndLimitList(getListQ()));
+			setListP(sortAndLimitListQ());
 
 			// Schritt 3: // Johannes
 			// übernimm die mutabilitäten der auswahl aus Q, die es nach P schafft
 		}
 
-//    	return getReturnIndividual(); TODO
-		return null;
-	}
-
-	// 0 %
-	private void create_successor() { // Yorck
-		// Wähle zufälliges Individuum aus Mu gleichverteilt
-		// Berechne Zufallsvektor normalverteilt mit Länge Arity
-		// Berechne getZufallszahl() z log-normal-verteilt aus [0,2]
-		// Mutiere damit die Mutabilität des zufällig gewählten Elters [i] multiplikativ mit z
-		// Addiere mutierte Mutabilität mal z zum Elter => Speichere als Nachkomme
-		// Füge Nachkomme zur Population Q hinzu
-		// Füge Mutabilität des Nachkommens zu M hinzu
+//    	return getReturnIndividual();
+		return getFirstElementOfListP().getParameter();
 	}
 
 	// muss wahrscheinlich neu - Johannes
@@ -119,35 +108,65 @@ class Evolution {
 		// returnarray[i] setzen
 		// ende schleife
 
-
-		double[] ancestor = new double[getOb().getArity()];        // Länge des Returnarrays = arity = Anzahl der Parameter
+		double[] parameters = new double[getOb().getArity()];        // Länge des Returnarrays = arity = Anzahl der Parameter
 
 		for (int i = 0; i < getOb().getArity(); i++) {                // Schleife über die Dimensionen (Anzahl Parameter)
 //    		double MinValue = getOb().getRange(i)[0];				// ermittelt Mindestwert des Parameters
 //    		double MaxValue = getOb().getRange(i)[1];				// ermittelt Maximalwert des Parameters
 //    		ancestor[i] = getRandomDouble(MinValue, MaxValue);			// getRandomDouble ermittelt zufälligen Wert zwischen Min und Max, der als Parameterwert des Individuums gespeichert wird
-			ancestor[i] = getRandomDouble(getOb().getRange(i)[0], getOb().getRange(i)[1]);
+			parameters[i] = getRandomDouble(getOb().getRange(i));
 		}
 
-//    	return ancestor;
-		return new PopulationElement(new double[]{0}, 1);
+//    	return parameters;
+		return new PopulationElement(parameters, getMutability());
+	}
+
+	// TODO all: Nicht mehr benötigt wegen Objekterzeugung? Oder soll der Wert von dem Standard abweichen?
+	//private void setInitialMutabilities() {
+	// setze mutabilitäten initial (diese sollen sich später ändern können)
+	// for(int i = 0; i<getMu();i++){
+	// mutab_mu[i] = getMutability();
+	// }
+	// }
+
+	// fertig
+	private PopulationElement create_successor() {
+		// Wähle zufälliges Individuum aus Mu gleichverteilt
+		// Berechne Zufallsvektor normalverteilt mit Länge Arity
+		// Berechne Zufallszahl z log-normal-verteilt aus [0,2]
+		// Mutiere damit die Mutabilität des zufällig gewählten Elters [i] multiplikativ mit z
+		// Addiere mutierte Mutabilität mal z zum Elter => Speichere als Nachkomme
+		// Füge Nachkomme zur Population Q hinzu
+		// Füge Mutabilität des Nachkommens zu M hinzu
+		PopulationElement parent = getListP().get(getRandomIndex());
+		double childMutability = parent.getMutability() * getRandomKsi();
+
+		double[] childParameters = new double[getOb().getArity()];
+		double[] randomZ = getRandomZ();
+		for (int i = 0; i < getOb().getArity(); i++) {
+			double minRange = getOb().getRange(i)[0];
+			double maxRange = getOb().getRange(i)[1];
+			double childParameter = parent.getParameter()[i] + childMutability * randomZ[i];
+
+			if (childParameter <= minRange) {
+				childParameters[i] = minRange;
+			} else if (maxRange <= childParameter) {
+				childParameters[i] = maxRange;
+			} else {
+				childParameters[i] = childParameter;
+			}
+		}
+
+		return new PopulationElement(childParameters, childMutability);
 	}
 
 	// fertig
-	private void setInitialMutabilities() { // Yorck
-		// setze mutabilitäten initial (diese sollen sich später ändern können)
-		for (int i = 0; i < getMu(); i++) {
-//    		mutab_mu[i] = getMutability(); TODO
-		}
-	}
-
-	// fertig
-	private PopulationElement getReturnIndividual() { // Yorck
+	private PopulationElement getFirstElementOfListP() {
 		// nimm die aktuelle population
 		// iteriere drüber und berechne funktionswerte
 		// wähle das individuum mit dem kleinsten funktionswert
 		// returne das individuum
-//    	return new double[] {0};
+		// return new double[] {0};
 		return getListP().get(0);
 	}
 
@@ -155,8 +174,9 @@ class Evolution {
 	// Methoden zur Erstellung der getZufallszahl()en:
 
 	// fertig
-	private double getRandomDouble(double min, double max) {                // Methode zur Erstellung von Parameterwerten der Individuen. Empfängt min und max als Unter- bzw. Obergrenze
-
+	private double getRandomDouble(double[] rangeVector) {                // Methode zur Erstellung von Parameterwerten der Individuen. Empfängt min und max als Unter- bzw. Obergrenze
+		double min = rangeVector[0];
+		double max = rangeVector[1];
 		return (min + (max - min) * getZufallszahl().nextDouble());            // gibt einen gleichverteilten Double zwischen Min und Max zurück
 	}
 
@@ -197,8 +217,8 @@ class Evolution {
 		return Ksi;
 	}
 
-	private List<PopulationElement> sortAndLimitList(List<PopulationElement> list) {
-		return list.stream()
+	private List<PopulationElement> sortAndLimitListQ() {
+		return getListQ().stream()
 				.sorted(Comparator.comparing(PopulationElement::getFunctionValue))
 				.limit(getMu())
 				.collect(Collectors.toList());
@@ -306,5 +326,4 @@ class Evolution {
 	public void setZufallszahl(Random zufallszahl) {
 		this.zufallszahl = zufallszahl;
 	}
-
 }
