@@ -34,9 +34,9 @@ class Evolution {
 		this.setSeed(seed); // wird dem Konstruktor übergeben
 
 		// Selbst festgelegte Parameter (eigener Ermessensspielraum)
-		this.setMutability(1.0);
-		this.setLambda(50);
-		this.setMu(50);
+		this.setMutability(3);
+		this.setLambda(10000); //vorher: 8000
+		this.setMu(3000); // vorher: 1000
 
 		this.setZufallszahl(new Random(seed));// Erstellt ein Objekt der Klasse Random mit dem gegebenen Seed, auf dem die Methoden zur Zufallszahl ausgeführt werden können; wichtig dafür: import java.util.*
 	}
