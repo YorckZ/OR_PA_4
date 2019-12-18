@@ -48,7 +48,7 @@ public class EvolutionTest {
     /**
      * Global Minimum at f(0.548563444114526) = -0.869011134989500
      */
-//    @Test
+    @Test
     public void myInstance00_GramacyLee() {
         ObjFunction f = new GramacyLee();
         test(f, -0.869011134989500, 8000, 0.001);
@@ -57,7 +57,7 @@ public class EvolutionTest {
     /**
      * Global Minimum at f(-10, 1) = 0
      */
-//    @Test
+    @Test
     public void myInstance01_BukinNumberSix() {
         ObjFunction f = new BukinNumberSix();
         test(f, 0, 8000, 0.001);
@@ -66,7 +66,7 @@ public class EvolutionTest {
     /**
      * Global Minimum at f(1, 1) = 0
      */
-//    @Test
+    @Test
     public void myInstance02_LevyNumberThirteen() {
         ObjFunction f = new LevyNumberThirteen();
         test(f, 0, 8000, 0.001);
@@ -75,7 +75,7 @@ public class EvolutionTest {
     /**
      * Global Minimum at f(0, 0) = 0
      */
-//    @Test
+    @Test
     public void myInstance1_Rastrigin_d2() {
         ObjFunction f = new Rastrigin(2);
         test(f, 0, 8000, 0.001);
@@ -84,7 +84,7 @@ public class EvolutionTest {
     /**
      * Global Minimum at f(0, ..., 0) = 0
      */
-//    @Test
+    @Test
     public void myInstance2_Rastrigin_d3() {
         ObjFunction f = new Rastrigin(3);
         test(f, 0, 8000, 0.001);
@@ -93,7 +93,7 @@ public class EvolutionTest {
     /**
      * Global Minimum at f(0, ..., ..., 0) = 0
      */
-//    @Test
+    @Test
     public void myInstance3_Rastrigin_d4() {
         ObjFunction f = new Rastrigin(4);
         test(f, 0, 8000, 0.001);
@@ -102,7 +102,7 @@ public class EvolutionTest {
     /**
      * Global Minimum at f(420.9687, 420.9687) = 0
      */
-//    @Test
+    @Test
     public void myInstance4_Schwefel_d2() {
         ObjFunction f = new Rastrigin(2);
         test(f, 0, 8000, 0.001);
@@ -111,7 +111,7 @@ public class EvolutionTest {
     /**
      * Global Minimum at f(420.9687, ..., 420.9687) = 0
      */
-//    @Test
+    @Test
     public void myInstance5_Schwefel_d3() {
         ObjFunction f = new Rastrigin(3);
         test(f, 0, 8000, 0.001);
@@ -120,7 +120,7 @@ public class EvolutionTest {
     /**
      * Global Minimum at f(-2.903534, -2.903534) = 0
      */
-//    @Test
+    @Test
     public void myInstance6_Schwefel_d4() {
         ObjFunction f = new Rastrigin(4);
         test(f, 0, 8000, 0.001);
@@ -129,7 +129,7 @@ public class EvolutionTest {
     /**
      * Global Minimum at f(-2.903534, ..., -2.903534) = -39.16599 * 2
      */
-//    @Test
+    @Test
     public void myInstance7_StyblinskiTang_d2() {
         int d = 2;
         ObjFunction f = new StyblinskiTang(d);
@@ -140,7 +140,7 @@ public class EvolutionTest {
     /**
      * Global Minimum at f(-2.903534, ..., ..., -2.903534) = -39.16599 * 3
      */
-//    @Test
+    @Test
     public void myInstance8_StyblinskiTang_d3() {
         int d = 3;
         ObjFunction f = new StyblinskiTang(d);
@@ -151,7 +151,7 @@ public class EvolutionTest {
     /**
      * Global Minimum at f(420.9687, ..., ..., 420.9687) = -39.16599 * 4
      */
-//    @Test
+    @Test
     public void myInstance9_StyblinskiTang_d4() {
         int d = 4;
         ObjFunction f = new StyblinskiTang(d);
@@ -179,6 +179,7 @@ public class EvolutionTest {
             double eps = 0.0000001;
 
             Evolution E = new Evolution(f, 1l);
+//            Evolution E = new Evolution(f, 2l);
             double[] x = E.compute(200);
 
             assertEquals(n, x.length, "Output has wrong dimension.");
