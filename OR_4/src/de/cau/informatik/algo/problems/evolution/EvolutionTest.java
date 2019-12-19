@@ -93,7 +93,7 @@ public class EvolutionTest {
     /**
      * Global Minimum at f(0, ..., ..., 0) = 0
      */
-    @Test
+//    @Test
     public void myInstance3_Rastrigin_d4() {
         ObjFunction f = new Rastrigin(4);
         test(f, 0, 8000, 0.001);
@@ -120,7 +120,8 @@ public class EvolutionTest {
     /**
      * Global Minimum at f(-2.903534, -2.903534) = 0
      */
-    @Test
+//    @Test
+//    @Test
     public void myInstance6_Schwefel_d4() {
         ObjFunction f = new Rastrigin(4);
         test(f, 0, 8000, 0.001);
