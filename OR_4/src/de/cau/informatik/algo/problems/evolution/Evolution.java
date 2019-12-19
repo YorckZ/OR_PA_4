@@ -43,6 +43,18 @@ class Evolution {
 		this.setSeed(seed); // wird dem Konstruktor übergeben
 		this.setZufallszahl(new Random(seed));// Erstellt ein Objekt der Klasse Random mit dem gegebenen Seed, auf dem die Methoden zur Zufallszahl ausgeführt werden können; wichtig dafür: import java.util.*
 		
+		
+	     /** Zur Wahl der Parameter Delta, Lambda, Mu
+		 * Begonnen haben wir mit den Werten (1, 50, 50). Dies half uns vor Allem in der Entwurfsphase, wann wir welche Lambdas und Mus betrachten.
+		 * Sowie die Implementierung fertig war, erhöhten wir die Paramterwerte in den dreistelligen Bereich, ohne Erfolge zu verbuchen.
+		 * Schließlich erhöhten wir sie drastisch, und fanden in der Konstellation (3, 10000, 3000) eine erste, die (bei großem Rechenaufwand)
+		 * alle gestellten Probleme löste.
+		 * 
+		 * Durch ausprobieren verschiedener einzelner Wertreduzierungen konnten wir sehen, dass wir bei (2.5, 9750, 2275) gerade noch alle Probleme lösen können,
+		 * mit etwas vermindertem Rechenaufwand. Viel weiter kann keiner der drei Parameter reduziert werden, ohne dass erste Tests fehlschlagen. 
+		 */
+		
+		
 		// Selbst festgelegte Parameter (eigener Ermessensspielraum)
 		this.setMutability(2.5); // Erstmals erfolgreich mit Wert 3
 		this.setLambda(9750); // Erstmals erfolgreich mit Wert 10000
