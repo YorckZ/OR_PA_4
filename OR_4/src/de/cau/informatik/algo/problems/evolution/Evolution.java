@@ -60,7 +60,6 @@ class Evolution {
 		this.setLambda(9750); // Erstmals erfolgreich mit Wert 10000
 		this.setMu(2275); // Erstmals erfolgreich mit Wert 3000
 	}
-
 	/**
 	 * Repeat the evolutionary algorithm for a certain number of steps
 	 *
