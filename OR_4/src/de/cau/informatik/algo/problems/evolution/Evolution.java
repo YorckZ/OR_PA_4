@@ -17,6 +17,12 @@ class Evolution {
 	 * Ebenso greifen wir auf seinen Vorschlag, Testfälle von https://www.sfu.ca zu verwenden, zurück.
 	 **/
 	
+	
+	/** Eigene Testfunktion
+	 * Neben den diversen Testfällen von https://www.sfu.ca haben wir
+	 * einen eigenen Testfall erstellt, der aufgrund seiner syntaktischen Nähe zur Rosenbrockfunktion
+	 * schlicht Rosenbrock2 heißt. 
+	 **/
 
 
 	private double mutability; // Wird im Konstruktor gesetzt
@@ -45,7 +51,7 @@ class Evolution {
 		
 		
 	     /** Zur Wahl der Parameter Delta, Lambda, Mu
-		 * Begonnen haben wir mit den Werten (1, 50, 50). Dies half uns vor Allem in der Entwurfsphase, wann wir welche Lambdas und Mus betrachten.
+		 * Begonnen haben wir mit den Werten (1, 50, 50). Dies half uns vor Allem, uns in der Entwurfsphase zu vergegenwärtigen, wann wir welche Lambdas und Mus betrachten.
 		 * Sowie die Implementierung fertig war, erhöhten wir die Paramterwerte in den dreistelligen Bereich, ohne Erfolge zu verbuchen.
 		 * Schließlich erhöhten wir sie drastisch, und fanden in der Konstellation (3, 10000, 3000) eine erste, die (bei großem Rechenaufwand)
 		 * alle gestellten Probleme löste.

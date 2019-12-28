@@ -32,7 +32,7 @@ public class EvolutionTest {
         ObjFunction f = new Rosenbrock();
         test(f,0, 4000);
     }
-
+    
     @Test
     public void instance4() {
         ObjFunction f = new Griewank(3);
@@ -45,6 +45,15 @@ public class EvolutionTest {
         test(f, 42, 8000, 0.05);
     }
 
+    /**
+     * Global Minimum at f(3, 12, 3, 0) = -150
+     */
+    @Test // selbst geschriebener Testfall
+    public void myOwnRosenbrock() {
+        ObjFunction f = new Rosenbrock2();
+        test(f, -150, 4000);
+    }
+   
     /**
      * Global Minimum at f(0.548563444114526) = -0.869011134989500
      */
@@ -91,15 +100,6 @@ public class EvolutionTest {
     }
 
     /**
-     * Global Minimum at f(0, ..., ..., 0) = 0
-     */
-//    @Test
-    public void myInstance3_Rastrigin_d4() {
-        ObjFunction f = new Rastrigin(4);
-        test(f, 0, 8000, 0.001);
-    }
-
-    /**
      * Global Minimum at f(420.9687, 420.9687) = 0
      */
     @Test
@@ -114,16 +114,6 @@ public class EvolutionTest {
     @Test
     public void myInstance5_Schwefel_d3() {
         ObjFunction f = new Rastrigin(3);
-        test(f, 0, 8000, 0.001);
-    }
-
-    /**
-     * Global Minimum at f(-2.903534, -2.903534) = 0
-     */
-//    @Test
-//    @Test
-    public void myInstance6_Schwefel_d4() {
-        ObjFunction f = new Rastrigin(4);
         test(f, 0, 8000, 0.001);
     }
 
@@ -180,7 +170,6 @@ public class EvolutionTest {
             double eps = 0.0000001;
 
             Evolution E = new Evolution(f, 1l);
-//            Evolution E = new Evolution(f, 2l);
             double[] x = E.compute(200);
 
             assertEquals(n, x.length, "Output has wrong dimension.");
